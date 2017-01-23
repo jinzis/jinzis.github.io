@@ -112,7 +112,7 @@
 <meta property="og:description" content="要想理解面向对象的编程思想，就要理解类的继承、封装和多态，今天就总结一下几种常见的继承方式。讲继承之前需要先理解构造函数，关于这个可以看我的另一篇文章，这里就不进行详细的描述了。
 第一种：原型继承原型继承是一种很常见的继承的方式，也是一种最常用的继承的方式。原型继承是子类原型继承父类实例的方法。
 123456789101112131415function Parent() &amp;#123;//这是父类">
-<meta property="og:updated_time" content="2017-01-21T12:06:36.997Z">
+<meta property="og:updated_time" content="2017-01-22T11:15:57.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="继承">
 <meta name="twitter:description" content="要想理解面向对象的编程思想，就要理解类的继承、封装和多态，今天就总结一下几种常见的继承方式。讲继承之前需要先理解构造函数，关于这个可以看我的另一篇文章，这里就不进行详细的描述了。
@@ -352,22 +352,23 @@
         <p>要想理解面向对象的编程思想，就要理解类的继承、封装和多态，今天就总结一下几种常见的继承方式。<br>讲继承之前需要先理解构造函数，关于这个可以看我的另一篇文章，这里就不进行详细的描述了。</p>
 <h3 id="第一种：原型继承"><a href="#第一种：原型继承" class="headerlink" title="第一种：原型继承"></a>第一种：原型继承</h3><p>原型继承是一种很常见的继承的方式，也是一种最常用的继承的方式。<br>原型继承是子类原型继承父类实例的方法。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是父类</span></div><div class="line">    <span class="keyword">this</span>.x = <span class="number">100</span>;</div><div class="line">&#125;</div><div class="line">Parent.prototype.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是子类</span></div><div class="line">    <span class="keyword">this</span>.y = <span class="number">200</span>;</div><div class="line">&#125;</div><div class="line">Child.prototype = <span class="keyword">new</span> Parent;<span class="comment">//实现了原型继承</span></div><div class="line">Child.prototype.constructor = Child;<span class="comment">//不写这句的话Child.prototype.constructor = Parent.prototype.constructor</span></div><div class="line"><span class="keyword">var</span> child  = <span class="keyword">new</span> Child;</div><div class="line"><span class="built_in">console</span>.log(child.x)<span class="comment">//100;</span></div><div class="line"><span class="built_in">console</span>.log(child.fn)<span class="comment">//function() &#123;console.log(this.x)&#125;</span></div></pre></td></tr></table></figure>
-<p>通过上面的方法就实现了原型的继承，首先创建一个Parent的实例，把Parent的实例赋值给Child的prototype，<br>这样子类就拥有了父类上的方法。<br>首先我们把定义在函数内部的叫做私有的，定义在原型上的叫做公有的。<br>原型继承是子类把父类的公有的和私有的都继承到子类的公有上，这样的继承是通过原型链的查找的方式<br>继承的，这种继承的方式有一个弊端，子类可以通过原型链查找改写父类的方法。<br><a id="more"></a></p>
-<h3 id="第二种：call继承"><a href="#第二种：call继承" class="headerlink" title="第二种：call继承"></a>第二种：call继承</h3><p>call继承是借用了Function类上的call方法，call方法的作用是让函数执行，并改变函数内的this的指向。</p>
+<a id="more"></a>
+<p>通过上面的方法就实现了原型的继承，首先创建一个<code>Parent</code>的实例，把<code>Parent</code>的实例赋值给<code>Child</code>的<code>prototype</code>，<br>这样子类就拥有了父类上的方法。<br>首先我们把定义在函数内部的叫做私有的，定义在原型上的叫做公有的。<br>原型继承是子类把父类的公有的和私有的都继承到子类的公有上，这样的继承是通过原型链的查找的方式<br>继承的，这种继承的方式有一个弊端，子类可以通过原型链查找改写父类的方法。</p>
+<h3 id="第二种：call继承"><a href="#第二种：call继承" class="headerlink" title="第二种：call继承"></a>第二种：call继承</h3><p>call继承是借用了<code>Function</code>类上的<code>call</code>方法，<code>call</code>方法的作用是让函数执行，并改变函数内的<code>this</code>的指向。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是父类</span></div><div class="line">    <span class="keyword">this</span>.x = <span class="number">100</span>;</div><div class="line">&#125;</div><div class="line">Parent.prototype.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是子类</span></div><div class="line">    Parent.call(<span class="keyword">this</span>);<span class="comment">//让Parent运行，并让Parent中的this指向Child的实例</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> child  = <span class="keyword">new</span> Child;</div><div class="line"><span class="built_in">console</span>.log(child.x)<span class="comment">//100;</span></div><div class="line"><span class="built_in">console</span>.log(child.fn)<span class="comment">//undefined</span></div></pre></td></tr></table></figure>
-<p>call继承是把Parent的私有复制一份给Child私有的，这样就不能改写Parent上的方法，但这种继承方式只能继承私有的，<br>不能继承定义在prototype上的公有方法。</p>
-<h3 id="第三种：冒充对象继承"><a href="#第三种：冒充对象继承" class="headerlink" title="第三种：冒充对象继承"></a>第三种：冒充对象继承</h3><p>定义一个对象类型的变量，把父类的实例赋值给这个对象，在利用for in遍历对象中的每一项，并把值赋值给子类的实例</p>
+<p>call继承是把<code>Parent</code>的私有复制一份给<code>Child</code>私有的，这样就不能改写<code>Parent</code>上的方法，但这种继承方式只能继承私有的，<br>不能继承定义在<code>prototype</code>上的公有方法。</p>
+<h3 id="第三种：冒充对象继承"><a href="#第三种：冒充对象继承" class="headerlink" title="第三种：冒充对象继承"></a>第三种：冒充对象继承</h3><p>定义一个对象类型的变量，把父类的实例赋值给这个对象，在利用<code>for in</code>遍历对象中的每一项，并把值赋值给子类的实例</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是父类</span></div><div class="line">    <span class="keyword">this</span>.x = <span class="number">100</span>;</div><div class="line">&#125;</div><div class="line">Parent.prototype.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是子类</span></div><div class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span>  Parent;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</div><div class="line">        <span class="keyword">this</span>[key] = obj[key];</div><div class="line">    &#125;</div><div class="line">    obj = <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> child  = <span class="keyword">new</span> Child;</div><div class="line"><span class="built_in">console</span>.log(child.x)<span class="comment">//100;</span></div><div class="line"><span class="built_in">console</span>.log(child.prototype.fn)<span class="comment">//undefined</span></div></pre></td></tr></table></figure>
-<p>冒充对象继承是把Parent上的私有和公有的都复制一份给Child的私有的</p>
+<p>冒充对象继承是把<code>Parent</code>上的私有和公有的都复制一份给<code>Child</code>的私有的</p>
 <h3 id="第四种：混合模式继承"><a href="#第四种：混合模式继承" class="headerlink" title="第四种：混合模式继承"></a>第四种：混合模式继承</h3><p>混合模式继承是原型继承+call继承<br>子类私有的继承父类私有的，子类公有的继承父类公有+私有的，多继承了一份父类私有的</p>
-<h3 id="第五种：寄生组合式继承"><a href="#第五种：寄生组合式继承" class="headerlink" title="第五种：寄生组合式继承"></a>第五种：寄生组合式继承</h3><p>借用Object上的create方法，这个方法在IE6-8上不兼容，这个方法的作用是创建一个类的原型</p>
+<h3 id="第五种：寄生组合式继承"><a href="#第五种：寄生组合式继承" class="headerlink" title="第五种：寄生组合式继承"></a>第五种：寄生组合式继承</h3><p>借用<code>Object</code>上的<code>create</code>方法，这个方法在IE6-8上不兼容，这个方法的作用是创建一个类的原型</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是父类</span></div><div class="line">    <span class="keyword">this</span>.x = <span class="number">100</span>;</div><div class="line">&#125;</div><div class="line">Parent.prototype.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params"></span>) </span>&#123;<span class="comment">//这是子类</span></div><div class="line">    Parent.call(<span class="keyword">this</span>)<span class="comment">//继承父类私有的</span></div><div class="line">&#125;</div><div class="line">Child.prototype = <span class="built_in">Object</span>(Parent.prototype);<span class="comment">//继承父类公有的</span></div><div class="line"><span class="keyword">var</span> child  = <span class="keyword">new</span> Child;</div><div class="line"><span class="built_in">console</span>.log(child.x)<span class="comment">//100;</span></div><div class="line"><span class="built_in">console</span>.log(child.prototype.fn)<span class="comment">//function() &#123;console.log(this.x)&#125;</span></div></pre></td></tr></table></figure>
 <p>create的兼容写法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myCreate</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Fn</span> (<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">    Fn.prototype = obj;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Fn;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这种继承方式是比较好的，子类私有的继承父类私有的，子类公有的继承父类公有的，这种也能通过原型链的查找改写父类上的方法</p>
-<h3 id="第六种：中间件继承"><a href="#第六种：中间件继承" class="headerlink" title="第六种：中间件继承"></a>第六种：中间件继承</h3><p>这种继承不兼容IE浏览器，应为在IE浏览器下禁止访问<strong>proto</strong>这个属性</p>
+<h3 id="第六种：中间件继承"><a href="#第六种：中间件继承" class="headerlink" title="第六种：中间件继承"></a>第六种：中间件继承</h3><p>这种继承不兼容IE浏览器，应为在IE浏览器下禁止访问<code>__proto__</code>这个属性</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">arguments</span>.__proto__ = <span class="built_in">Array</span>.prototype;</div></pre></td></tr></table></figure>
-<p>arguments是一个类数组，不能直接使用数组上的方法，如果使用中间类继承法，让类数组的<strong>proto</strong>指向数组的原型，类数组就可以通过<br>原型链的查找，找到数组上的方法，就可以使用数组上的方法了。</p>
+<p><code>arguments</code>是一个类数组，不能直接使用数组上的方法，如果使用中间类继承法，让类数组的<code>__proto__</code>指向数组的原型，类数组就可以通过<br>原型链的查找，找到数组上的方法，就可以使用数组上的方法了。</p>
 
       
     </div>
@@ -400,15 +401,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/19/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/22/javascript常用的设计模式/" rel="prev" title="javascript常用的设计模式">
+                javascript常用的设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -478,7 +479,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -489,7 +490,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
